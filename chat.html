@@ -1,0 +1,1157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
+<meta name="theme-color" content="#fff8fb">
+<title>PONNU ❤️</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--pink:#ef5686;--soft:#fff1f6;--bg:#fff8fb;--card:#fff;--text:#29232a;--muted:#958891;--border:#eee1e7;--mine:linear-gradient(135deg,#f45b89,#dd568d);--shadow:0 20px 60px rgba(80,35,60,.13)}
+body.dark{--bg:#171419;--card:#211c21;--text:#f7edf2;--muted:#aaa0a8;--border:#382f36;--soft:#2b2026;--shadow:0 20px 60px rgba(0,0,0,.4)}
+body{height:100vh;overflow:hidden;font-family:Segoe UI,Arial,sans-serif;color:var(--text);background:radial-gradient(circle at 10% 10%,rgba(255,187,210,.35),transparent 28%),radial-gradient(circle at 90% 90%,rgba(210,180,255,.25),transparent 30%),var(--bg);transition:background .25s ease,color .25s ease;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+button,input,textarea{font:inherit}
+.app{height:100vh;display:flex;justify-content:center;align-items:center;padding:18px}
+.chat-container{width:min(1100px,100%);height:min(900px,94vh);display:flex;flex-direction:column;overflow:hidden;background:var(--card);border:1px solid var(--border);border-radius:28px;box-shadow:var(--shadow);backdrop-filter:blur(18px);animation:appIn .45s ease both}
+.chat-header{height:78px;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);background:color-mix(in srgb,var(--card) 88%,transparent);backdrop-filter:blur(18px);position:relative;z-index:10}
+.profile{display:flex;align-items:center;gap:12px}.avatar{width:48px;height:48px;border-radius:50%;display:flex;justify-content:center;align-items:center;background:var(--soft);color:var(--pink);font-size:22px;font-weight:800;overflow:hidden}.avatar img{width:100%;height:100%;object-fit:cover}
+.profile h2{font-size:17px}.profile p{font-size:12px;color:var(--muted);margin-top:3px}.status-dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:#b9b0b5;margin-right:5px}.status-dot.online{background:#39c77a}
+.header-actions{display:flex;gap:7px}.icon-btn{width:40px;height:40px;border:0;border-radius:50%;background:transparent;color:var(--text);cursor:pointer;font-size:18px}.icon-btn:hover{background:var(--soft);color:var(--pink);transform:translateY(-1px)}.icon-btn:active,.send-btn:active,.emoji-btn:active{transform:scale(.94)}button:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px solid var(--pink);outline-offset:2px}
+.search-panel{display:none;padding:10px 16px;border-bottom:1px solid var(--border);background:var(--card)}.search-panel.show{display:block}.search-panel input{width:100%;border:1px solid var(--border);outline:none;border-radius:14px;padding:10px 13px;background:var(--bg);color:var(--text)}
+.menu{display:none;position:absolute;right:18px;top:65px;width:190px;padding:8px;background:var(--card);border:1px solid var(--border);border-radius:16px;box-shadow:var(--shadow);z-index:20}.menu.show{display:block}.menu button{display:block;width:100%;border:0;background:transparent;text-align:left;padding:11px;border-radius:10px;color:var(--text);cursor:pointer}.menu button:hover{background:var(--soft)}
+.profile-modal{display:none;position:fixed;inset:0;background:rgba(20,15,20,.42);backdrop-filter:blur(7px);z-index:200;align-items:center;justify-content:center;padding:18px}.profile-modal.show{display:flex}
+.profile-card{width:min(460px,100%);max-height:90vh;overflow:auto;background:var(--card);border:1px solid var(--border);border-radius:24px;box-shadow:var(--shadow);padding:22px;animation:panelIn .2s ease both}.profile-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}.profile-top h3{font-size:20px}.profile-close{border:0;background:var(--soft);color:var(--text);width:34px;height:34px;border-radius:50%;cursor:pointer}.profile-avatar{width:76px;height:76px;border-radius:50%;background:var(--soft);color:var(--pink);display:flex;align-items:center;justify-content:center;font-size:30px;font-weight:800;margin:0 auto 10px}.profile-email{text-align:center;color:var(--muted);font-size:12px;margin-bottom:18px}.profile-grid{display:grid;gap:12px}.profile-field label{display:block;font-size:12px;font-weight:700;margin:0 0 6px;color:var(--muted)}.profile-field input,.profile-field textarea{width:100%;border:1px solid var(--border);border-radius:13px;background:var(--bg);color:var(--text);padding:11px 12px;outline:none}.profile-field textarea{min-height:78px;resize:vertical}.profile-field input:focus,.profile-field textarea:focus{border-color:var(--pink)}.account-since{margin-top:14px;padding:12px 13px;background:var(--soft);border-radius:13px;font-size:13px;color:var(--text)}.profile-actions{display:flex;gap:8px;margin-top:16px}.profile-actions button{flex:1;border:0;border-radius:13px;padding:11px;cursor:pointer}.profile-cancel{background:var(--soft);color:var(--text)}.profile-save{background:var(--pink);color:white}
+.chat-area{flex:1;overflow-y:auto;padding:22px 20px 12px;scroll-behavior:smooth;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:var(--border) transparent}.welcome{text-align:center;color:var(--muted);padding:45px 15px}.welcome .heart{font-size:42px;margin-bottom:10px}.welcome h3{color:var(--text);margin-bottom:6px}
+.message-row{display:flex;margin:8px 0;animation:messageIn .22s ease both}.message-row.mine{justify-content:flex-end}.message-row.theirs{justify-content:flex-start}.bubble-wrap{max-width:min(75%,620px);position:relative}.bubble{padding:10px 13px;border-radius:18px;transition:transform .15s ease,box-shadow .15s ease;word-break:break-word;white-space:pre-wrap;line-height:1.45;border:1px solid var(--border);background:var(--card)}.mine .bubble{background:var(--mine);color:white;border:0;border-bottom-right-radius:5px;box-shadow:0 7px 20px rgba(239,86,134,.13)}.theirs .bubble{border-bottom-left-radius:5px}
+.reply-quote{padding:7px 9px;margin-bottom:7px;border-left:3px solid var(--pink);background:rgba(255,255,255,.16);border-radius:8px;font-size:12px;opacity:.9}.theirs .reply-quote{background:var(--soft)}
+.meta{display:flex;justify-content:flex-end;align-items:center;gap:5px;font-size:10px;margin-top:5px;opacity:.72}.tick{letter-spacing:-2px}.mine .tick.seen{color:#bff3ff}.reaction{display:inline-block;margin-top:4px;padding:2px 7px;border-radius:10px;background:var(--soft);font-size:13px}
+.actions{display:none;position:absolute;top:-35px;right:0;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:4px;box-shadow:var(--shadow);white-space:nowrap}.message-row:hover .actions{display:flex}.actions button{border:0;background:transparent;color:var(--text);cursor:pointer;padding:5px 7px;border-radius:7px}.actions button:hover{background:var(--soft);color:var(--pink)}
+.typing{height:24px;padding:0 22px;color:var(--muted);font-size:12px;font-style:italic}.composer{position:relative;padding:10px 14px 14px;border-top:1px solid var(--border);background:var(--card)}
+.reply-preview{display:none;align-items:center;justify-content:space-between;background:var(--soft);padding:9px 12px;border-radius:12px;margin-bottom:8px;font-size:12px}.reply-preview.show{display:flex}.reply-preview button{border:0;background:transparent;cursor:pointer}
+.input-row{display:flex;align-items:flex-end;gap:8px}.input-box{flex:1;display:flex;align-items:flex-end;gap:6px;background:var(--bg);border:1px solid var(--border);border-radius:20px;padding:5px 8px}.input-box textarea{flex:1;border:0;outline:0;resize:none;background:transparent;color:var(--text);min-height:38px;max-height:120px;padding:9px 5px}.send-btn{width:42px;height:42px;border:0;border-radius:50%;background:var(--pink);color:white;cursor:pointer;box-shadow:0 7px 18px rgba(239,86,134,.24);transition:transform .15s ease,box-shadow .15s ease}.send-btn:hover{box-shadow:0 9px 24px rgba(239,86,134,.32);transform:translateY(-1px)}.emoji-btn{width:38px;height:38px;border:0;background:transparent;cursor:pointer;font-size:20px}
+.emoji-panel{display:none;position:absolute;bottom:72px;left:15px;right:15px;background:var(--card);border:1px solid var(--border);border-radius:18px;padding:10px;box-shadow:var(--shadow);z-index:15}.emoji-panel.show{display:grid;animation:panelIn .18s ease both;grid-template-columns:repeat(10,1fr);gap:5px}.emoji-panel button{border:0;background:transparent;padding:7px;cursor:pointer;border-radius:9px}.emoji-panel button:hover{background:var(--soft)}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(20px);background:#282128;color:white;padding:10px 15px;border-radius:12px;opacity:0;pointer-events:none;transition:.25s;z-index:100}.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+@keyframes appIn{from{opacity:0;transform:translateY(10px) scale(.99)}to{opacity:1;transform:none}}@keyframes messageIn{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}@keyframes panelIn{from{opacity:0;transform:translateY(6px) scale(.98)}to{opacity:1;transform:none}}@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation:none!important;transition:none!important}}@media(max-width:650px){.app{padding:0}.chat-container{height:100vh;height:100dvh;border-radius:0;border:0}.chat-header{height:70px;padding:10px 12px}.bubble-wrap{max-width:86%}.chat-area{padding:16px 12px 8px}.header-actions{gap:1px}.icon-btn{width:36px;height:36px}.emoji-panel.show{grid-template-columns:repeat(7,1fr)}.actions{display:flex;top:auto;bottom:-32px;right:0}.message-row{margin-bottom:38px}}
+
+/* ===== PONNU GEN-Z UI refresh ===== */
+.chat-container{border-radius:30px}
+.chat-header{background:color-mix(in srgb,var(--card) 82%,transparent)}
+.chat-area{padding:24px 18px 14px}
+.message-row{margin:10px 0}
+.bubble-wrap{max-width:min(78%,650px)}
+.bubble{
+  padding:11px 14px;
+  border-radius:22px;
+  line-height:1.5;
+  box-shadow:0 5px 18px rgba(70,35,60,.05);
+}
+.mine .bubble{
+  border-bottom-right-radius:7px;
+  box-shadow:0 8px 22px rgba(239,86,134,.16);
+}
+.theirs .bubble{border-bottom-left-radius:7px}
+.input-box{
+  border-radius:28px;
+  padding:6px 8px 6px 7px;
+  background:color-mix(in srgb,var(--bg) 92%,var(--card));
+  box-shadow:0 6px 22px rgba(70,35,60,.08);
+  transition:.2s ease;
+}
+.input-box:focus-within{
+  border-color:var(--pink);
+  box-shadow:0 0 0 4px rgba(239,86,134,.10),0 8px 24px rgba(70,35,60,.08);
+}
+.input-box textarea{
+  min-height:42px;
+  padding:10px 8px;
+  font-size:14px;
+}
+.send-btn{
+  width:44px;height:44px;
+  font-size:18px;
+  background:linear-gradient(135deg,#ff5d8b,#e94d91);
+}
+.pin-badge{
+  display:inline-flex;align-items:center;gap:4px;
+  margin-top:5px;padding:3px 8px;border-radius:999px;
+  background:var(--soft);color:var(--muted);font-size:10px;
+}
+.pinned-strip{
+  display:none;align-items:center;gap:9px;
+  padding:8px 14px;border-bottom:1px solid var(--border);
+  background:var(--soft);font-size:12px;
+}
+.pinned-strip.show{display:flex}
+.pinned-strip .pin-text{flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pinned-strip button{
+  border:0;background:transparent;color:var(--muted);cursor:pointer;
+  padding:5px 7px;border-radius:8px
+}
+.pinned-strip button:hover{background:var(--card);color:var(--pink)}
+.pin-list{
+  display:none;position:absolute;right:18px;top:65px;width:min(320px,calc(100vw - 36px));
+  padding:10px;background:var(--card);border:1px solid var(--border);
+  border-radius:18px;box-shadow:var(--shadow);z-index:30
+}
+.pin-list.show{display:block}
+.pin-list h4{font-size:13px;margin:3px 5px 8px}
+.pin-item{padding:9px 10px;border-radius:11px;cursor:pointer;font-size:12px;color:var(--text)}
+.pin-item:hover{background:var(--soft)}
+@media(max-width:600px){
+  .bubble-wrap{max-width:86%}
+  .chat-area{padding-left:12px;padding-right:12px}
+}
+</style>
+</head>
+<body>
+<div class="app"><main class="chat-container">
+<header class="chat-header">
+<div class="profile">
+<div class="avatar" id="partnerAvatar"><span id="partnerLetter">P</span></div>
+<div><h2 id="partnerName">PONNU ❤️</h2><p><span id="onlineDot" class="status-dot"></span><span id="partnerStatus">Connecting...</span></p></div>
+</div>
+<div class="header-actions">
+<button class="icon-btn" onclick="toggleSearch()" title="Search">⌕</button>
+<button class="icon-btn" onclick="toggleTheme()" title="Theme">☼</button>
+<button class="icon-btn" onclick="toggleMenu()" title="Menu">⋮</button>
+</div>
+<div id="menu" class="menu">
+<button onclick="openProfile();toggleMenu()">👤 My profile</button>
+<button onclick="toggleTheme();toggleMenu()">☼ Toggle theme</button>
+<button onclick="requestNotifications();toggleMenu()">🔔 Notifications</button>
+<button onclick="toggleSound();toggleMenu()">🔊 Sound: <span id="soundState">On</span></button>
+<button onclick="logout()">↪ Logout</button>
+</div>
+<div id="pinList" class="pin-list">
+  <h4>📌 Pinned in chat</h4>
+  <div id="pinItems"></div>
+</div>
+
+</header>
+<div id="searchPanel" class="search-panel"><input id="searchInput" placeholder="Search messages..." oninput="searchMessages()"></div>
+<div id="pinnedStrip" class="pinned-strip">
+  <span>📌</span>
+  <span id="pinnedStripText" class="pin-text"></span>
+  <button onclick="jumpToPinned()" title="Jump to pinned">Open</button>
+  <button onclick="togglePinnedList()" title="View pinned">⋯</button>
+</div>
+
+<section id="chatArea" class="chat-area"><div id="welcome" class="welcome"><div class="heart">❤️</div><h3>Welcome to PONNU</h3><p>Your private chat space.</p></div></section>
+<div id="typingArea" class="typing"></div>
+<footer class="composer">
+<div id="replyPreview" class="reply-preview"><span>↩️ <b>Replying:</b> <span id="replyText"></span></span><button onclick="cancelReply()">✕</button></div>
+<div class="input-row"><div class="input-box"><button class="emoji-btn" onclick="toggleEmoji()">😊</button><textarea id="messageInput" rows="1" placeholder="type something… 👀"></textarea></div><button class="send-btn" onclick="sendMessage()">➤</button></div>
+<div id="emojiPanel" class="emoji-panel"></div>
+</footer>
+</main></div><div id="profileModal" class="profile-modal" onclick="if(event.target===this)closeProfile()">
+  <div class="profile-card">
+    <div class="profile-top"><h3>My profile</h3><button class="profile-close" onclick="closeProfile()">✕</button></div>
+    <div class="profile-avatar" id="profileAvatar">P</div>
+    <div class="profile-email" id="profileEmail"></div>
+    <div class="profile-grid">
+      <div class="profile-field"><label for="profileUsername">Username / name</label><input id="profileUsername" maxlength="40" placeholder="Your name"></div>
+      <div class="profile-field"><label for="profileNickname">Nickname</label><input id="profileNickname" maxlength="30" placeholder="Nickname"></div>
+      <div class="profile-field"><label for="profileBio">Bio</label><textarea id="profileBio" maxlength="160" placeholder="Tell something about yourself"></textarea></div>
+      <div class="profile-field"><label for="profileBirthday">Birthday</label><input id="profileBirthday" type="date"></div>
+    </div>
+    <div class="account-since">📅 Account since <b>May 9, 2026</b></div>
+    <div class="profile-actions"><button class="profile-cancel" onclick="closeProfile()">Cancel</button><button class="profile-save" onclick="saveProfile()">Save changes</button></div>
+  </div>
+</div><div id="toast" class="toast"></div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
+import { getAuth,onAuthStateChanged,signOut } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
+import { getFirestore,doc,getDoc,setDoc,updateDoc,deleteDoc,collection,addDoc,onSnapshot,query,orderBy,limitToLast,serverTimestamp } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+
+const firebaseConfig={
+  apiKey:"AIzaSyA11kPDh7J4NUb3BQwB-RSarBvBiEKAdvM",
+  authDomain:"ponnu-34058.firebaseapp.com",
+  projectId:"ponnu-34058",
+  messagingSenderId:"250496802032",
+  appId:"1:250496802032:web:4d1e08dfd545ac13623635"
+};
+
+const app=initializeApp(firebaseConfig);
+const auth=getAuth(app);
+const db=getFirestore(app);
+
+const USER_1="2DC3rL5qhoXLXejPvmHj85c4XxF2";
+const USER_2="n6S3HsCADJMYaFFcm2PqdB371Lk1";
+
+let currentUser=null;
+let partnerUser=null;
+let currentUserProfile=null;
+let chatId=null;
+let unsubscribeMessages=null;
+let unsubscribePartner=null;
+let editingMessageId=null;
+let replyMessage=null;
+let lastSnapshot=null;
+let seenInFlight=new Set();
+let typingTimer=null;
+let presenceTimer=null;
+let presenceActive=false;
+let soundEnabled=localStorage.getItem("ponnuSound")!=="off";
+let audioContext=null;
+let messagesInitialized=false;
+let lastNotifiedMessageId=null;
+let privateKey=null;
+let publicKey=null;
+const plainTextCache=new Map();
+const pinnedMessages=new Map();
+
+const $=id=>document.getElementById(id);
+const isMember=uid=>uid===USER_1||uid===USER_2;
+const chatKey=()=>[USER_1,USER_2].sort().join("_");
+
+const escapeHtml=s=>String(s??"").replace(/[&<>'"]/g,c=>({
+  "&":"&amp;","<":"&lt;",">":"&gt;","'":"&#39;",'"':"&quot;"
+}[c]));
+
+function toast(msg){
+  const t=$("toast");
+  t.textContent=msg;
+  t.classList.add("show");
+  clearTimeout(window.__toast);
+  window.__toast=setTimeout(()=>t.classList.remove("show"),2400);
+}
+
+function toDate(v){return v?.toDate?v.toDate():(v?new Date(v):null)}
+function formatTime(d){return d?new Intl.DateTimeFormat(undefined,{hour:"numeric",minute:"2-digit"}).format(d):""}
+function formatSeen(d){return d?new Intl.DateTimeFormat(undefined,{month:"short",day:"numeric",hour:"numeric",minute:"2-digit"}).format(d):""}
+
+/* ---------- NOTIFICATION + SOUND ---------- */
+
+function updateSoundUI(){
+  const el=$("soundState");
+  if(el)el.textContent=soundEnabled?"On":"Off";
+}
+updateSoundUI();
+
+function toggleSound(){
+  soundEnabled=!soundEnabled;
+  localStorage.setItem("ponnuSound",soundEnabled?"on":"off");
+  updateSoundUI();
+  if(soundEnabled)playMessageSound();
+}
+
+function unlockAudio(){
+  try{
+    if(!audioContext){
+      const Ctx=window.AudioContext||window.webkitAudioContext;
+      if(!Ctx)return;
+      audioContext=new Ctx();
+    }
+    if(audioContext.state==="suspended")audioContext.resume();
+  }catch(e){console.warn("Audio unavailable",e)}
+}
+
+function playMessageSound(){
+  if(!soundEnabled)return;
+  try{
+    unlockAudio();
+    if(!audioContext)return;
+    const now=audioContext.currentTime;
+    const osc=audioContext.createOscillator();
+    const gain=audioContext.createGain();
+    osc.type="sine";
+    osc.frequency.setValueAtTime(880,now);
+    osc.frequency.exponentialRampToValueAtTime(660,now+0.12);
+    gain.gain.setValueAtTime(0.0001,now);
+    gain.gain.exponentialRampToValueAtTime(0.12,now+0.01);
+    gain.gain.exponentialRampToValueAtTime(0.0001,now+0.22);
+    osc.connect(gain).connect(audioContext.destination);
+    osc.start(now);
+    osc.stop(now+0.24);
+  }catch(e){console.warn("Sound failed",e)}
+}
+
+async function showIncomingNotification(d){
+  if(!("Notification" in window)||Notification.permission!=="granted")return;
+  if(document.visibilityState==="visible"&&document.hasFocus())return;
+  try{
+    const title=partnerUser?.displayName||"PONNU ❤️";
+    const body=(d.text||"New message").slice(0,120);
+    const n=new Notification(title,{body,tag:"ponnu-message",silent:true});
+    n.onclick=()=>{window.focus();n.close()};
+  }catch(e){console.warn("Notification failed",e)}
+}
+
+async function handleIncomingMessages(snapshot){
+  if(!currentUser)return;
+  if(!messagesInitialized){
+    messagesInitialized=true;
+    const docs=snapshot.docs;
+    if(docs.length)lastNotifiedMessageId=docs[docs.length-1].id;
+    return;
+  }
+  if(!snapshot.docChanges)return;
+  for(const change of snapshot.docChanges()){
+    if(change.type!=="added")continue;
+    const raw=change.doc.data();
+    if(raw.senderId===currentUser.uid)continue;
+    if(change.doc.id===lastNotifiedMessageId)continue;
+    lastNotifiedMessageId=change.doc.id;
+    let d={text:"New message"};
+    try{ d=await decryptPayload({...raw,__id:change.doc.id}); }catch(e){}
+    playMessageSound();
+    showIncomingNotification(d);
+  }
+}
+
+["pointerdown","keydown","touchstart"].forEach(evt=>{
+  window.addEventListener(evt,unlockAudio,{once:false,passive:true});
+});
+
+/* ---------- AUTH / START ---------- */
+
+onAuthStateChanged(auth,async user=>{
+  if(!user){
+    location.href="index.html";
+    return;
+  }
+
+  if(!isMember(user.uid)){
+    toast("This account is not authorized for PONNU.");
+    await signOut(auth);
+    return;
+  }
+
+  currentUser=user;
+  console.log("Logged in:",user.email);
+
+  try{
+    await createUserProfile();
+    const ownProfileSnap=await getDoc(doc(db,"users",currentUser.uid));
+    currentUserProfile=ownProfileSnap.exists()?ownProfileSnap.data():{};
+    await setPresence(true);
+    await findPartner();
+  }catch(e){
+    console.error("PONNU startup error:",e);
+    toast("PONNU could not start: "+e.message);
+  }
+});
+
+async function createUserProfile(){
+  const ref=doc(db,"users",currentUser.uid);
+  const snap=await getDoc(ref);
+
+  const existing=snap.exists()?snap.data():{};
+  const data={
+    email:currentUser.email||existing.email||"",
+    displayName:existing.displayName||currentUser.displayName||currentUser.email?.split("@")[0]||"User",
+    nickname:existing.nickname||"",
+    bio:existing.bio||"",
+    birthday:existing.birthday||"",
+    accountSince:existing.accountSince||"2026-05-09",
+    photoURL:currentUser.photoURL||existing.photoURL||"",
+    online:true,
+    typing:false,
+    lastSeen:serverTimestamp()
+  };
+
+  if(snap.exists()) await updateDoc(ref,data);
+  else await setDoc(ref,data);
+}
+
+/* ---------- MESSAGE PAYLOAD ---------- */
+/* E2EE is intentionally not enabled in this version. */
+async function encryptPayload(payload){
+  return payload;
+}
+
+async function decryptPayload(d){
+  /* Older test messages may have been created by the accidental E2EE build.
+     Keep them visible as locked instead of throwing repeated console errors. */
+  if(d?.ciphertext){
+    return {
+      text:"🔒 Older encrypted message — send a new message in this version.",
+      replyTo:null
+    };
+  }
+  return {
+    text:d?.text||"",
+    replyTo:d?.replyTo||null
+  };
+}
+
+async function findPartner(){
+  const partnerUid=currentUser.uid===USER_1?USER_2:USER_1;
+  const snap=await getDoc(doc(db,"users",partnerUid));
+
+  partnerUser={
+    uid:partnerUid,
+    ...(snap.exists()?snap.data():{
+      displayName:"My Person ❤️",
+      email:""
+    })
+  };
+
+  chatId=chatKey();
+
+  updatePartnerUI();
+  listenToPartner();
+  listenToMessages();
+}
+
+/* ---------- REAL ONLINE / OFFLINE / LAST SEEN ---------- */
+
+async function setPresence(online){
+  if(!currentUser)return;
+
+  const data=online
+    ? {online:true,lastSeen:serverTimestamp()}
+    : {online:false,typing:false,lastSeen:serverTimestamp()};
+
+  try{
+    await updateDoc(doc(db,"users",currentUser.uid),data);
+    presenceActive=online;
+  }catch(e){
+    console.warn("Presence update failed:",e);
+  }
+}
+
+function startPresenceHeartbeat(){
+  clearInterval(presenceTimer);
+
+  presenceTimer=setInterval(async()=>{
+    if(document.visibilityState==="visible" && currentUser){
+      await setPresence(true);
+    }
+  },30000);
+}
+
+function stopPresenceHeartbeat(){
+  clearInterval(presenceTimer);
+  presenceTimer=null;
+}
+
+function handlePresenceVisibility(){
+  if(!currentUser)return;
+
+  if(document.visibilityState==="visible"){
+    setPresence(true);
+    startPresenceHeartbeat();
+    markVisibleMessagesSeen();
+  }else{
+    setPresence(false);
+    stopPresenceHeartbeat();
+  }
+}
+
+document.addEventListener("visibilitychange",handlePresenceVisibility);
+
+window.addEventListener("focus",()=>currentUser&&setPresence(true));
+window.addEventListener("blur",()=>currentUser&&setPresence(false));
+
+/*
+  beforeunload is best-effort only. Firebase cannot guarantee an async
+  write finishes while a tab is being closed, so visibility/heartbeat
+  are the main presence mechanisms.
+*/
+window.addEventListener("beforeunload",()=>{
+  if(!currentUser)return;
+  updateDoc(doc(db,"users",currentUser.uid),{
+    online:false,
+    typing:false,
+    lastSeen:serverTimestamp()
+  }).catch(()=>{});
+});
+
+/* ---------- PARTNER STATUS + TYPING ---------- */
+
+function updatePartnerUI(){
+  const name=partnerUser.nickname||partnerUser.displayName||partnerUser.email||"User";
+
+  $("partnerName").textContent=name;
+  $("partnerLetter").textContent=name.trim().charAt(0).toUpperCase()||"P";
+
+  if(partnerUser.photoURL){
+    $("partnerAvatar").innerHTML=
+      `<img src="${escapeHtml(partnerUser.photoURL)}" alt="">`;
+  }
+}
+
+function listenToPartner(){
+  if(unsubscribePartner)unsubscribePartner();
+
+  unsubscribePartner=onSnapshot(
+    doc(db,"users",partnerUser.uid),
+    snap=>{
+      if(!snap.exists())return;
+
+      const d=snap.data();
+      const online=!!d.online;
+      const typing=!!d.typing;
+
+      $("onlineDot").classList.toggle("online",online);
+
+      if(online){
+        $("partnerStatus").textContent=typing?"Online":"Online";
+      }else{
+        $("partnerStatus").textContent=
+          d.lastSeen
+            ? `Last seen ${formatSeen(toDate(d.lastSeen))}`
+            : "Offline";
+      }
+
+      $("typingArea").textContent=
+        online&&typing ? `${partnerUser.nickname||partnerUser.displayName||"They"} is typing…` : "";
+    },
+    e=>console.error("Partner listener:",e)
+  );
+}
+
+async function setTyping(isTyping){
+  if(!currentUser)return;
+
+  try{
+    await updateDoc(doc(db,"users",currentUser.uid),{
+      typing:isTyping,
+      online:true,
+      lastSeen:serverTimestamp()
+    });
+  }catch(e){
+    console.warn("Typing update failed:",e);
+  }
+}
+
+function handleTyping(){
+  if(!currentUser)return;
+
+  clearTimeout(typingTimer);
+
+  const text=$("messageInput").value.trim();
+
+  if(!text){
+    setTyping(false);
+    return;
+  }
+
+  setTyping(true);
+
+  typingTimer=setTimeout(()=>{
+    setTyping(false);
+  },1200);
+}
+
+/* ---------- MESSAGES ---------- */
+
+function listenToMessages(){
+  if(unsubscribeMessages)unsubscribeMessages();
+
+  const messagesRef=collection(db,"chats",chatId,"messages");
+  const q=query(messagesRef,orderBy("createdAt","asc"),limitToLast(20));
+
+  unsubscribeMessages=onSnapshot(
+    q,
+    snap=>{
+      lastSnapshot=snap;
+      handleIncomingMessages(snap);
+      renderMessages(snap);
+      markIncomingDeliveredAndSeen(snap);
+    },
+    e=>{
+      console.error("Message listener:",e);
+      toast("Chat could not load: "+e.message);
+    }
+  );
+}
+
+async function renderMessages(snapshot){
+  const area=$("chatArea");
+  area.innerHTML="";
+
+  if(snapshot.empty){
+    const welcome=document.createElement("div");
+    welcome.className="welcome";
+    welcome.innerHTML=`<div class="heart">❤️</div><h3>Welcome to PONNU</h3><p>Your private chat space.</p>`;
+    area.appendChild(welcome);
+    return;
+  }
+
+  refreshPinnedUI(snapshot);
+
+  for(const ds of snapshot.docs){
+    const raw=ds.data();
+    const d={...raw,__id:ds.id};
+    try{
+      Object.assign(d,await decryptPayload(d));
+    }catch(e){
+      console.warn("Message decrypt failed:",e);
+      d.text="🔒 Encrypted message";
+      d.replyTo=null;
+    }
+    area.appendChild(createMessageElement(ds.id,d));
+  }
+
+  scrollBottom();
+}
+
+function createMessageElement(id,d){
+  const mine=d.senderId===currentUser.uid;
+
+  const row=document.createElement("div");
+  row.className="message-row "+(mine?"mine":"theirs");
+  row.dataset.id=id;
+
+  const wrap=document.createElement("div");
+  wrap.className="bubble-wrap";
+
+  const actions=document.createElement("div");
+  actions.className="actions";
+
+  actions.innerHTML=
+    `<button onclick="replyToMessage('${id}')">↩</button>
+     <button onclick="togglePinMessage('${id}')">📌</button>
+     <button onclick="reactToMessage('${id}','❤️')">❤️</button>
+     ${mine?`<button onclick="editMessage('${id}')">✏</button>
+     <button onclick="deleteMessage('${id}')">🗑</button>`:""}`;
+
+  wrap.appendChild(actions);
+
+  const bubble=document.createElement("div");
+  bubble.className="bubble";
+
+  if(d.replyTo){
+    bubble.innerHTML=
+      `<div class="reply-quote">↩ ${escapeHtml(d.replyTo.text||"")}</div>`;
+  }
+
+  bubble.innerHTML+=escapeHtml(d.text||"");
+
+  if(d.edited){
+    bubble.innerHTML+=` <small>(edited)</small>`;
+  }
+
+  wrap.appendChild(bubble);
+
+  if(d.pinned){
+    const pinBadge=document.createElement("div");
+    pinBadge.className="pin-badge";
+    pinBadge.textContent="📌 Pinned";
+    wrap.appendChild(pinBadge);
+  }
+
+  const meta=document.createElement("div");
+  meta.className="meta";
+
+  meta.innerHTML=`<span>${formatTime(toDate(d.createdAt))}</span>`;
+
+  if(mine){
+    if(d.seen){
+      meta.innerHTML+=
+        `<span class="tick seen" title="Seen ${escapeHtml(formatSeen(toDate(d.seenAt)))}">✓✓</span>`;
+    }else if(d.delivered){
+      meta.innerHTML+=`<span class="tick" title="Delivered">✓✓</span>`;
+    }else{
+      meta.innerHTML+=`<span class="tick" title="Sent">✓</span>`;
+    }
+  }
+
+  wrap.appendChild(meta);
+
+  if(d.reaction){
+    wrap.innerHTML+=`<span class="reaction">${escapeHtml(d.reaction)}</span>`;
+  }
+
+  row.appendChild(wrap);
+  return row;
+}
+
+/* ---------- PINNED MESSAGES ---------- */
+
+function getPinnedDocs(snapshot){
+  return snapshot.docs
+    .map(ds=>({id:ds.id,data:ds.data()}))
+    .filter(x=>x.data?.pinned)
+    .sort((a,b)=>{
+      const ta=toDate(a.data.pinnedAt)?.getTime()||0;
+      const tb=toDate(b.data.pinnedAt)?.getTime()||0;
+      return tb-ta;
+    });
+}
+
+async function togglePinMessage(id){
+  if(!currentUser||!chatId)return;
+
+  const ds=lastSnapshot?.docs.find(x=>x.id===id);
+  if(!ds)return;
+
+  const d=ds.data();
+  const willPin=!d.pinned;
+
+  try{
+    await updateDoc(
+      doc(db,"chats",chatId,"messages",id),
+      willPin
+        ? {pinned:true,pinnedAt:serverTimestamp(),pinnedBy:currentUser.uid}
+        : {pinned:false,pinnedAt:null,pinnedBy:null}
+    );
+    toast(willPin?"📌 Message pinned":"Message unpinned");
+  }catch(e){
+    console.error("Pin update failed:",e);
+    toast("Could not update pin");
+  }
+}
+
+function refreshPinnedUI(snapshot){
+  const strip=$("pinnedStrip");
+  const stripText=$("pinnedStripText");
+  const items=$("pinItems");
+
+  if(!strip||!stripText||!items)return;
+
+  const pinned=getPinnedDocs(snapshot);
+
+  items.innerHTML="";
+
+  if(!pinned.length){
+    strip.classList.remove("show");
+    items.innerHTML='<div class="pin-item" style="cursor:default;color:var(--muted)">No pinned messages yet.</div>';
+    return;
+  }
+
+  const first=pinned[0].data;
+  strip.classList.add("show");
+  stripText.textContent=(first.text||"Pinned message").replace(/\s+/g," ").trim();
+
+  for(const item of pinned){
+    const div=document.createElement("div");
+    div.className="pin-item";
+    div.textContent="📌 "+((item.data.text||"Pinned message").replace(/\s+/g," ").trim());
+    div.onclick=()=>jumpToMessage(item.id);
+    items.appendChild(div);
+  }
+}
+
+function togglePinnedList(){
+  const list=$("pinList");
+  if(list)list.classList.toggle("show");
+}
+
+function jumpToPinned(){
+  const pinned=getPinnedDocs(lastSnapshot);
+  if(!pinned.length){
+    toast("No pinned messages");
+    return;
+  }
+  jumpToMessage(pinned[0].id);
+}
+
+function jumpToMessage(id){
+  const el=document.querySelector(`.message-row[data-id="${CSS.escape(id)}"]`);
+  if(!el){
+    toast("That message is not in the latest 20 messages");
+    return;
+  }
+
+  $("pinList")?.classList.remove("show");
+  el.scrollIntoView({behavior:"smooth",block:"center"});
+  el.animate(
+    [
+      {transform:"scale(1)",boxShadow:"0 0 0 rgba(239,86,134,0)"},
+      {transform:"scale(1.03)",boxShadow:"0 0 0 6px rgba(239,86,134,.18)"},
+      {transform:"scale(1)",boxShadow:"0 0 0 rgba(239,86,134,0)"}
+    ],
+    {duration:650}
+  );
+}
+
+document.addEventListener("click",e=>{
+  const list=$("pinList");
+  const button=e.target.closest?.('[onclick="togglePinnedList()"]');
+  if(list?.classList.contains("show") && !list.contains(e.target) && !button){
+    list.classList.remove("show");
+  }
+});
+
+async function markIncomingDeliveredAndSeen(snapshot){
+  if(!currentUser||!chatId||document.visibilityState!=="visible")return;
+
+  const writes=[];
+
+  for(const ds of snapshot.docs){
+    const raw=ds.data();
+    const d={...raw,__id:ds.id};
+    try{ Object.assign(d,await decryptPayload(d)); }catch(e){ console.warn("Message decrypt failed:",e); d.text="🔒 Encrypted message"; d.replyTo=null; }
+
+    if(d.senderId===currentUser.uid)continue;
+
+    const ref=doc(db,"chats",chatId,"messages",ds.id);
+
+    if(!d.delivered){
+      writes.push(
+        updateDoc(ref,{
+          delivered:true,
+          deliveredAt:serverTimestamp()
+        })
+      );
+    }
+
+    if(!d.seen&&!seenInFlight.has(ds.id)){
+      seenInFlight.add(ds.id);
+
+      writes.push(
+        updateDoc(ref,{
+          seen:true,
+          seenAt:serverTimestamp()
+        })
+      );
+    }
+  }
+
+  if(writes.length){
+    try{
+      await Promise.all(writes);
+    }catch(e){
+      console.error("Receipt update:",e);
+    }
+  }
+}
+
+async function markVisibleMessagesSeen(){
+  if(lastSnapshot){
+    await markIncomingDeliveredAndSeen(lastSnapshot);
+  }
+}
+
+async function sendMessage(){
+  unlockAudio();
+  if(!currentUser||!chatId)return;
+
+  const input=$("messageInput");
+  const text=input.value.trim();
+
+  if(!text)return;
+
+  try{
+    const payload=await encryptPayload({
+      text,
+      replyTo:replyMessage
+        ? {id:replyMessage.id,text:replyMessage.text}
+        : null
+    });
+
+    await addDoc(
+      collection(db,"chats",chatId,"messages"),
+      {
+        ...payload,
+        senderId:currentUser.uid,
+        createdAt:serverTimestamp(),
+        delivered:false,
+        seen:false,
+        reaction:null,
+        edited:false
+      }
+    );
+
+    input.value="";
+    autoResize();
+    cancelReply();
+    closeEmoji();
+    setTyping(false);
+    scrollBottom();
+
+  }catch(e){
+    console.error(e);
+    toast("Message failed: "+e.message);
+  }
+}
+
+async function editMessage(id){
+  const ds=lastSnapshot?.docs.find(x=>x.id===id);
+  if(!ds)return;
+
+  const raw=ds.data();
+  if(raw.senderId!==currentUser.uid)return;
+
+  let d;
+  try{ d=await decryptPayload({...raw,__id:id}); }
+  catch(e){ toast("This message could not be decrypted."); return; }
+
+  const text=prompt("Edit message:",d.text||"");
+  if(text===null||!text.trim())return;
+
+  try{
+    const encrypted=await encryptPayload({text:text.trim(),replyTo:d.replyTo||null});
+    await updateDoc(
+      doc(db,"chats",chatId,"messages",id),
+      {...encrypted,edited:true,editedAt:serverTimestamp()}
+    );
+    plainTextCache.delete(id);
+  }catch(e){
+    toast("Edit failed: "+e.message);
+  }
+}
+
+async function deleteMessage(id){
+  const ds=lastSnapshot?.docs.find(x=>x.id===id);
+
+  if(!ds||ds.data().senderId!==currentUser.uid)return;
+
+  if(!confirm("Delete this message?"))return;
+
+  try{
+    await deleteDoc(doc(db,"chats",chatId,"messages",id));
+  }catch(e){
+    toast("Delete failed: "+e.message);
+  }
+}
+
+async function reactToMessage(id,reaction){
+  try{
+    await updateDoc(
+      doc(db,"chats",chatId,"messages",id),
+      {reaction}
+    );
+  }catch(e){
+    toast("Reaction failed: "+e.message);
+  }
+}
+
+/* ---------- REPLY / EMOJI / SEARCH ---------- */
+
+async function replyToMessage(id){
+  const ds=lastSnapshot?.docs.find(x=>x.id===id);
+  if(!ds)return;
+
+  try{
+    const d=await decryptPayload({...ds.data(),__id:id});
+    replyMessage={id,text:d.text||""};
+    $("replyText").textContent=replyMessage.text;
+    $("replyPreview").classList.add("show");
+    $("messageInput").focus();
+  }catch(e){
+    toast("This message could not be decrypted.");
+  }
+}
+
+function cancelReply(){
+  replyMessage=null;
+  $("replyPreview").classList.remove("show");
+  $("replyText").textContent="";
+}
+
+const emojis=[
+"❤️","😍","🥰","😘","😊","😂","🥹","🫶","💕","💗",
+"💖","💘","✨","🫂","🥺","😌","🌸","🌙","🦋","🤍",
+"👍","🤣","❤️‍🔥","😭","😎","🙈","💋","💞","💓","🌹"
+];
+
+$("emojiPanel").innerHTML=emojis
+  .map(e=>`<button type="button" onclick="addEmoji('${e}')">${e}</button>`)
+  .join("");
+
+function addEmoji(e){
+  const input=$("messageInput");
+  input.value+=e;
+  input.focus();
+  autoResize();
+  handleTyping();
+}
+
+function toggleEmoji(){
+  $("emojiPanel").classList.toggle("show");
+}
+
+function closeEmoji(){
+  $("emojiPanel").classList.remove("show");
+}
+
+function toggleSearch(){
+  $("searchPanel").classList.toggle("show");
+
+  if($("searchPanel").classList.contains("show")){
+    $("searchInput").focus();
+  }
+}
+
+function searchMessages(){
+  const term=$("searchInput").value.toLowerCase().trim();
+
+  document.querySelectorAll(".message-row").forEach(row=>{
+    const text=row.querySelector(".bubble")?.innerText.toLowerCase()||"";
+    row.style.display=!term||text.includes(term)?"flex":"none";
+  });
+}
+
+function toggleTheme(){
+  document.body.classList.toggle("dark");
+
+  localStorage.setItem(
+    "ponnuTheme",
+    document.body.classList.contains("dark")?"dark":"light"
+  );
+}
+
+if(localStorage.getItem("ponnuTheme")==="dark"){
+  document.body.classList.add("dark");
+}
+
+function toggleMenu(){
+  $("menu").classList.toggle("show");
+}
+
+function scrollBottom(){
+  requestAnimationFrame(()=>{
+    const area=$("chatArea");
+    area.scrollTop=area.scrollHeight;
+  });
+}
+
+function autoResize(){
+  const input=$("messageInput");
+  input.style.height="auto";
+  input.style.height=Math.min(input.scrollHeight,120)+"px";
+}
+
+/* ---------- INPUT EVENTS ---------- */
+
+$("messageInput").addEventListener("input",()=>{
+  autoResize();
+  handleTyping();
+});
+
+$("messageInput").addEventListener("keydown",e=>{
+  if(e.key==="Enter"&&!e.shiftKey){
+    e.preventDefault();
+    sendMessage();
+  }
+});
+
+document.addEventListener("click",e=>{
+  if(!e.target.closest(".pin-list") && !e.target.closest("[onclick*=togglePinnedList]")) $("pinList")?.classList.remove("show");
+  if(!e.target.closest(".emoji-panel")&&!e.target.closest(".emoji-btn")){
+    closeEmoji();
+  }
+
+  if(!e.target.closest(".menu")&&!e.target.closest(".icon-btn")){
+    $("menu").classList.remove("show");
+  }
+});
+
+/* ---------- PROFILE ---------- */
+function openProfile(){
+  if(!currentUser)return;
+  const d=currentUserProfile||{};
+  $("profileUsername").value=d.displayName||"";
+  $("profileNickname").value=d.nickname||"";
+  $("profileBio").value=d.bio||"";
+  $("profileBirthday").value=d.birthday||"";
+  $("profileEmail").textContent=currentUser.email||"";
+  const name=d.nickname||d.displayName||"User";
+  $("profileAvatar").textContent=name.trim().charAt(0).toUpperCase()||"U";
+  $("profileModal").classList.add("show");
+}
+function closeProfile(){
+  $("profileModal").classList.remove("show");
+}
+window.openProfile = openProfile;
+window.closeProfile = closeProfile;
+window.saveProfile = saveProfile;
+
+async function saveProfile(){
+  if(!currentUser)return;
+  const displayName=$("profileUsername").value.trim();
+  const nickname=$("profileNickname").value.trim();
+  const bio=$("profileBio").value.trim();
+  const birthday=$("profileBirthday").value||"";
+  if(!displayName){
+    toast("Please enter a username / name.");
+    return;
+  }
+  try{
+    await updateDoc(doc(db,"users",currentUser.uid),{
+      displayName,
+      nickname,
+      bio,
+      birthday,
+      accountSince:"2026-05-09"
+    });
+    currentUserProfile={...(currentUserProfile||{}),displayName,nickname,bio,birthday,accountSince:"2026-05-09"};
+    $("profileAvatar").textContent=(nickname||displayName).charAt(0).toUpperCase();
+    toast("Profile updated");
+    closeProfile();
+  }catch(e){
+    console.error(e);
+    toast("Could not update profile");
+  }
+}
+
+/* ---------- NOTIFICATIONS / LOGOUT ---------- */
+
+async function requestNotifications(){
+  unlockAudio();
+  if(!("Notification" in window)){
+    toast("Notifications are not supported here.");
+    return;
+  }
+
+  try{
+    const permission=await Notification.requestPermission();
+
+    toast(
+      permission==="granted"
+        ?"Notifications enabled ❤️"
+        :"Notifications not enabled"
+    );
+  }catch(e){
+    toast("Notification permission failed");
+  }
+}
+
+async function logout(){
+  try{
+    clearTimeout(typingTimer);
+    stopPresenceHeartbeat();
+
+    if(currentUser){
+      await updateDoc(
+        doc(db,"users",currentUser.uid),
+        {
+          online:false,
+          typing:false,
+          lastSeen:serverTimestamp()
+        }
+      );
+    }
+
+    if(unsubscribeMessages)unsubscribeMessages();
+    if(unsubscribePartner)unsubscribePartner();
+
+    await signOut(auth);
+
+  }catch(e){
+    toast("Logout failed: "+e.message);
+  }
+}
+
+/* ---------- EXPOSE HTML BUTTON FUNCTIONS ---------- */
+
+window.toggleSearch=toggleSearch;
+window.toggleTheme=toggleTheme;
+window.toggleMenu=toggleMenu;
+window.requestNotifications=requestNotifications;
+window.logout=logout;
+window.sendMessage=sendMessage;
+window.toggleEmoji=toggleEmoji;
+window.addEmoji=addEmoji;
+window.cancelReply=cancelReply;
+window.replyToMessage=replyToMessage;
+window.editMessage=editMessage;
+window.deleteMessage=deleteMessage;
+window.reactToMessage=reactToMessage;
+window.searchMessages=searchMessages;
+window.openProfile=openProfile;
+window.closeProfile=closeProfile;
+window.saveProfile=saveProfile;
+window.toggleSound=toggleSound;
+window.togglePinMessage=togglePinMessage;
+window.togglePinnedList=togglePinnedList;
+window.jumpToPinned=jumpToPinned;
+
+</script>
+</body>
+</html>
