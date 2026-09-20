@@ -17,9 +17,9 @@ body {
     font-family: "Segoe UI", Arial, sans-serif;
     min-height: 100vh;
     background:
-        radial-gradient(circle at 10% 10%, #ffe4ec, transparent 30%),
-        radial-gradient(circle at 90% 90%, #f4e5ff, transparent 30%),
-        linear-gradient(135deg, #fff8fb, #ffffff);
+        radial-gradient(circle at 10% 10%, #dff1ff, transparent 30%),
+        radial-gradient(circle at 90% 90%, #e5f4ff, transparent 30%),
+        linear-gradient(135deg, #f5fbff, #ffffff);
     color: #29202a;
 }
 
@@ -51,26 +51,26 @@ body {
     align-items: center;
     justify-content: center;
     border-radius: 50%;
-    background: linear-gradient(135deg,#ffe1eb,#fff0f5);
+    background: linear-gradient(135deg,#dff0ff,#eef7ff);
     font-size: 34px;
-    box-shadow: 0 10px 30px rgba(255,79,129,.18);
+    box-shadow: 0 10px 30px rgba(63,127,240,.18);
 }
 
 .logo {
     font-size: 46px;
     font-weight: 800;
     letter-spacing: -2px;
-    background: linear-gradient(135deg,#ff4f81,#e83e8c,#9b59b6);
+    background: linear-gradient(135deg,#4f8cff,#3f7ff0,#56b7ff);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
 .heart {
-    -webkit-text-fill-color: #ff4f81;
+    -webkit-text-fill-color: #3f7ff0;
 }
 
 .subtitle {
-    color: #8d7b86;
+    color: #718096;
     font-size: 14px;
     margin: 8px 0 35px;
 }
@@ -85,13 +85,13 @@ body {
     margin-bottom: 7px;
     font-size: 13px;
     font-weight: 600;
-    color: #665762;
+    color: #5f718a;
 }
 
 .input-group input {
     width: 100%;
     padding: 15px 17px;
-    border: 1px solid #eadce3;
+    border: 1px solid #dbe8f7;
     border-radius: 15px;
     background: #fff;
     outline: none;
@@ -100,8 +100,8 @@ body {
 }
 
 .input-group input:focus {
-    border-color: #ff6b95;
-    box-shadow: 0 0 0 4px rgba(255,107,149,.1);
+    border-color: #4f8cff;
+    box-shadow: 0 0 0 4px rgba(79,140,255,.12);
 }
 
 .login-btn {
@@ -109,7 +109,7 @@ body {
     border: none;
     padding: 15px;
     border-radius: 15px;
-    background: linear-gradient(135deg,#ff5b88,#e94d91);
+    background: linear-gradient(135deg,#5aa0ff,#3979ea);
     color: white;
     font-size: 15px;
     font-weight: 700;
@@ -143,7 +143,7 @@ body {
 
 .footer-text {
     margin-top: 25px;
-    color: #a4949e;
+    color: #8495aa;
     font-size: 12px;
 }
 
@@ -155,6 +155,27 @@ body {
     .logo {
         font-size: 40px;
     }
+}
+
+html{background:#f5fbff}
+body{min-height:100dvh}
+input{font-size:16px}
+button{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+@media(max-width:500px){
+  .app{min-height:100dvh;padding:14px}
+  .login-card{max-width:430px;padding:34px 22px;border-radius:24px}
+  .big-heart{width:64px;height:64px;margin-bottom:18px}
+  .logo{font-size:40px}
+  .subtitle{margin-bottom:28px}
+  .input-group{margin-bottom:14px}
+  .input-group input{min-height:50px;padding:14px 15px}
+  .login-btn{min-height:50px;padding:14px}
+}
+@media(max-height:700px){
+  .login-card{padding-top:24px;padding-bottom:24px}
+  .big-heart{margin-bottom:12px}
+  .subtitle{margin-bottom:20px}
+  .footer-text{margin-top:16px}
 }
 </style>
 </head>
@@ -175,7 +196,7 @@ body {
             lowkey private. just us. ✨
         </div>
 
-        <div style="font-size:12px;color:#a4949e;margin:-18px 0 22px;">
+        <div style="font-size:12px;color:#8495aa;margin:-18px 0 22px;">
             no cap, your little corner of the internet 💅
         </div>
 
@@ -304,7 +325,7 @@ window.login = async function() {
 
 
         message.textContent =
-            "you’re in bestie 😌❤️";
+            "you’re in PONNU 😌💙";
 
         message.classList.add("success");
 
@@ -328,7 +349,7 @@ window.login = async function() {
             "nahhh, that login did not hit 😭 check your details.";
 
         if (error.code === "auth/invalid-credential") {
-            text = "wrong email or password bestie 😭";
+            text = "wrong email or password PONNU 😭";
         }
 
         if (error.code === "auth/too-many-requests") {
