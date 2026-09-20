@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>PONNU 💖</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    min-height: 100vh;
+    background:
+        radial-gradient(circle at 10% 10%, #dff1ff, transparent 30%),
+        radial-gradient(circle at 90% 90%, #e5f4ff, transparent 30%),
+        linear-gradient(135deg, #f5fbff, #ffffff);
+    color: #29202a;
+}
+
+.app {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.login-card {
+    width: 100%;
+    max-width: 420px;
+    padding: 42px 34px;
+    border-radius: 30px;
+    background: rgba(255,255,255,.88);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255,255,255,.9);
+    box-shadow: 0 25px 70px rgba(120,50,80,.15);
+    text-align: center;
+}
+
+.big-heart {
+    width: 72px;
+    height: 72px;
+    margin: 0 auto 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: linear-gradient(135deg,#dff0ff,#eef7ff);
+    font-size: 34px;
+    box-shadow: 0 10px 30px rgba(63,127,240,.18);
+}
+
+.logo {
+    font-size: 46px;
+    font-weight: 800;
+    letter-spacing: -2px;
+    background: linear-gradient(135deg,#4f8cff,#3f7ff0,#56b7ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.heart {
+    -webkit-text-fill-color: #3f7ff0;
+}
+
+.subtitle {
+    color: #718096;
+    font-size: 14px;
+    margin: 8px 0 35px;
+}
+
+.input-group {
+    text-align: left;
+    margin-bottom: 18px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 7px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #5f718a;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 15px 17px;
+    border: 1px solid #dbe8f7;
+    border-radius: 15px;
+    background: #fff;
+    outline: none;
+    font-size: 15px;
+    transition: .25s;
+}
+
+.input-group input:focus {
+    border-color: #4f8cff;
+    box-shadow: 0 0 0 4px rgba(79,140,255,.12);
+}
+
+.login-btn {
+    width: 100%;
+    border: none;
+    padding: 15px;
+    border-radius: 15px;
+    background: linear-gradient(135deg,#5aa0ff,#3979ea);
+    color: white;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 10px 25px rgba(233,77,145,.25);
+    transition: .25s;
+}
+
+.login-btn:hover {
+    transform: translateY(-2px);
+}
+
+.login-btn:disabled {
+    opacity: .6;
+    cursor: not-allowed;
+}
+
+.message {
+    min-height: 20px;
+    margin-top: 15px;
+    font-size: 13px;
+}
+
+.error {
+    color: #d9365b;
+}
+
+.success {
+    color: #26915a;
+}
+
+.footer-text {
+    margin-top: 25px;
+    color: #8495aa;
+    font-size: 12px;
+}
+
+@media(max-width:500px) {
+    .login-card {
+        padding: 35px 24px;
+    }
+
+    .logo {
+        font-size: 40px;
+    }
+}
+
+html{background:#f5fbff}
+body{min-height:100dvh}
+input{font-size:16px}
+button{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+@media(max-width:500px){
+  .app{min-height:100dvh;padding:14px}
+  .login-card{max-width:430px;padding:34px 22px;border-radius:24px}
+  .big-heart{width:64px;height:64px;margin-bottom:18px}
+  .logo{font-size:40px}
+  .subtitle{margin-bottom:28px}
+  .input-group{margin-bottom:14px}
+  .input-group input{min-height:50px;padding:14px 15px}
+  .login-btn{min-height:50px;padding:14px}
+}
+@media(max-height:700px){
+  .login-card{padding-top:24px;padding-bottom:24px}
+  .big-heart{margin-bottom:12px}
+  .subtitle{margin-bottom:20px}
+  .footer-text{margin-top:16px}
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+    <div class="login-card">
+
+        <div class="big-heart">❤️</div>
+
+        <div class="logo">
+            PONNU <span class="heart">♥</span>
+        </div>
+
+        <div class="subtitle">
+            lowkey private. just us. ✨
+        </div>
+
+        <div style="font-size:12px;color:#8495aa;margin:-18px 0 22px;">
+            no cap, your little corner of the internet 💅
+        </div>
+
+        <div class="input-group">
+            <label>📧 Email</label>
+            <input
+                type="email"
+                id="email"
+                placeholder="drop your email 👀"
+                autocomplete="email">
+        </div>
+
+        <div class="input-group">
+            <label>🔐 Password</label>
+            <input
+                type="password"
+                id="password"
+                placeholder="your secret sauce 🔒"
+                autocomplete="current-password">
+        </div>
+
+        <button class="login-btn" id="loginBtn" onclick="login()">
+            Let me in fr ❤️
+        </button>
+
+        <div id="message" class="message"></div>
+
+        <div class="footer-text">
+            private • no weird vibes • just PONNU ♥
+        </div>
+
+    </div>
+
+</div>
+
+<script type="module">
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
+
+import {
+    getAuth,
+    signInWithEmailAndPassword,
+    setPersistence,
+    browserLocalPersistence
+}
+from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
+
+
+/* ================================
+   FIREBASE CONFIG
+================================ */
+
+const firebaseConfig = {
+    apiKey: "AIzaSyA11kPDh7J4NUb3BQwB-RSarBvBiEKAdvM",
+    authDomain: "ponnu-34058.firebaseapp.com",
+    projectId: "ponnu-34058",
+    storageBucket: "ponnu-34058.firebasestorage.app",
+    messagingSenderId: "250496802032",
+    appId: "1:250496802032:web:4d1e08dfd545ac13623635",
+    measurementId: "G-HD86PN01YB"
+};
+
+
+/* ================================
+   INITIALIZE FIREBASE
+================================ */
+
+const app = initializeApp(firebaseConfig);
+
+const auth = getAuth(app);
+
+
+/* ================================
+   KEEP USER LOGGED IN
+================================ */
+
+setPersistence(auth, browserLocalPersistence);
+
+
+/* ================================
+   LOGIN
+================================ */
+
+window.login = async function() {
+
+    const email =
+        document.getElementById("email").value.trim();
+
+    const password =
+        document.getElementById("password").value;
+
+    const message =
+        document.getElementById("message");
+
+    const button =
+        document.getElementById("loginBtn");
+
+
+    message.textContent = "";
+    message.className = "message";
+
+
+    if (!email || !password) {
+
+        message.textContent =
+            "brooo, email + password first 😭❤️";
+
+        message.classList.add("error");
+
+        return;
+    }
+
+
+    button.disabled = true;
+    button.textContent = "logging you in... 👀";
+
+
+    try {
+
+        await signInWithEmailAndPassword(
+            auth,
+            email,
+            password
+        );
+
+
+        message.textContent =
+            "you’re in PONNU 😌💙";
+
+        message.classList.add("success");
+
+
+        /*
+           CHAT PAGE WILL BE ADDED NEXT
+        */
+
+        setTimeout(() => {
+
+            window.location.href = "chat.html";
+
+        }, 700);
+
+
+    } catch (error) {
+
+        console.error(error);
+
+        let text =
+            "nahhh, that login did not hit 😭 check your details.";
+
+        if (error.code === "auth/invalid-credential") {
+            text = "wrong email or password PONNU 😭";
+        }
+
+        if (error.code === "auth/too-many-requests") {
+            text = "whoa, too many tries 💀 try again later.";
+        }
+
+        message.textContent = text;
+        message.classList.add("error");
+
+        button.disabled = false;
+        button.textContent = "Let me in fr ❤️";
+    }
+};
+
+</script>
+
+</body>
+</html>
